@@ -40,7 +40,7 @@ public class QuoteServiceImpl implements QuoteService {
         return null;
     }*/
 
-    @Transactional
+ /*   @Transactional
     @Override
     public QuoteDto save(QuoteDto quoteDto) {
         Quote quote1;
@@ -62,9 +62,10 @@ public class QuoteServiceImpl implements QuoteService {
         return quoteMapper.toDTO(quoteRepository.save(quote1));
 
         //return quoteMapper.toDTO(quoteRepository.save(quoteMapper.toModel(quoteDto)));
-    }
+    }*/
 
-    /*   @Override
+    @Transactional
+       @Override
        public QuoteDto save(QuoteDto quoteDto) {
            Optional<Quote> quote = quoteRepository.findByIsin(quoteDto.getIsin());
            if (quote.isPresent()) {
@@ -105,12 +106,12 @@ public class QuoteServiceImpl implements QuoteService {
                }
 
            } else {
-
                Quote quote1;
                if(quoteDto.getBid()!=null) {
                    quote1 = Quote.builder()
                            .ask(quoteDto.getAsk())
                            .isin(quoteDto.getIsin())
+                           .bid(quoteDto.getBid())
                            .energyLevel(quoteDto.getBid())
                            .build();
                   // quote1.setEnergyLevel(quoteDto.getBid());
@@ -124,8 +125,13 @@ public class QuoteServiceImpl implements QuoteService {
                return quoteMapper.toDTO(quoteRepository.save(quote1));
            }
            //return quoteMapper.toDTO(quoteRepository.save(quoteMapper.toModel(quoteDto)));
-       }*/
-    @Transactional
+       }
+
+    @Override
+    public QuoteDto update(QuoteDto quoteDto) {
+        return null;
+    }
+  /*  @Transactional
     @Override
     public QuoteDto update(QuoteDto quoteDto) {
         Quote quote = quoteRepository.findByIsin(quoteDto.getIsin())
@@ -175,7 +181,7 @@ public class QuoteServiceImpl implements QuoteService {
 
      //   throw new QuoteNotUpdateException("Невозможно обновить квоту, т.к не найдена запись по isin");
         //return quoteMapper.toDTO(quoteRepository.save(quoteMapper.toModel(quoteDto)));
-    }
+    }*/
    /* @Override
     public QuoteDto update(QuoteDto quoteDto) {
         Optional<Quote> quote = quoteRepository.findByIsin(quoteDto.getIsin());

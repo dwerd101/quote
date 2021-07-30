@@ -11,8 +11,7 @@ public interface SecuritiesService<T,ID> {
     T save(T t);
     T update(T t);
     void remove(T t);
-    T findByIsin(T isin);
-    List<T> findAllByIsin(T isin);
+
 
 
 }

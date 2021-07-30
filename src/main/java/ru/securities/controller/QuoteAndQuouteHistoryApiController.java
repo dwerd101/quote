@@ -22,8 +22,6 @@ public class QuoteAndQuouteHistoryApiController {
 
     private final QuoteAndQuoteHistoryService quoteService;
 
-
-
     @PostMapping("/save")
     public Callable<ResponseEntity<QuoteDto>> save(@RequestBody @Valid QuoteDto quoteDto) {
         if(quoteDto.getBid()!=null) {
@@ -34,7 +32,7 @@ public class QuoteAndQuouteHistoryApiController {
         }
         return () -> ResponseEntity.ok(quoteService.save(quoteDto));
     }
-    @PutMapping("/update")
+   /* @PutMapping("/update")
     public Callable<ResponseEntity<QuoteDto>> update(@RequestBody @Valid QuoteDto quoteDto) {
         if(quoteDto.getBid()!=null) {
             if (quoteDto.getBid().compareTo(quoteDto.getAsk()) == 0) {
@@ -42,7 +40,7 @@ public class QuoteAndQuouteHistoryApiController {
             }
         }
         return () -> ResponseEntity.ok(quoteService.update(quoteDto));
-    }
+    }*/
 
 
 }

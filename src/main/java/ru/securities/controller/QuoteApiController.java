@@ -2,6 +2,7 @@ package ru.securities.controller;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +15,8 @@ import ru.securities.service.QuoteService;
 import ru.securities.service.SecuritiesService;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Callable;
 import java.util.stream.Collectors;
@@ -26,9 +29,11 @@ public class QuoteApiController {
 
     @GetMapping("/")
     public Callable<ResponseEntity<List<QuoteDto>>> findAll(@RequestParam(required = false) String isin) {
-        if (isin != null)
-            return () -> ResponseEntity.ok(quoteService.findAllByIsin(QuoteDto.builder().isin(isin).build()));
-        else return () -> ResponseEntity.ok(quoteService.findAll());
+        if (isin != null) {
+            List<QuoteDto> list = quoteService.findAllByIsin(QuoteDto.builder().isin(isin).build());
+            return () -> ResponseEntity.ok(list);
+        }
+       else return () -> ResponseEntity.ok(quoteService.findAll());
     }
 
     @GetMapping("/elv")
