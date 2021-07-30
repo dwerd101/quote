@@ -1,18 +1,17 @@
 package ru.securities.controller;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Qualifier;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.securities.model.Quote;
+
 import ru.securities.model.dto.QuoteDto;
 import ru.securities.service.QuoteAndQuoteHistoryService;
-import ru.securities.service.SecuritiesService;
-import ru.securities.util.RestPreconditions;
+
 
 import javax.validation.Valid;
-import java.util.List;
+
 import java.util.concurrent.Callable;
 
 @RestController
