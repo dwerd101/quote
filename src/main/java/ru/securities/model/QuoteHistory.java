@@ -1,5 +1,6 @@
 package ru.securities.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,6 +12,7 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
+import java.time.ZonedDateTime;
 
 @Data
 @AllArgsConstructor
@@ -40,5 +42,12 @@ public class QuoteHistory {
     @Column(name = "elv")
     private BigDecimal energyLevel;
 
+    @Column(name = "date")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
+    private ZonedDateTime zoneDateTime;
+
+    public static void main(String[] args) {
+
+    }
 
 }
