@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 //@WebMvcTest
 //@ContextConfiguration(classes = {AppApplication.class})
 @SpringBootTest(classes={AppApplication.class})
-public class QuoteHistoryApiControllerIntegrationTest {
+public class QuoteHistoryApiControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
