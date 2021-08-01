@@ -17,12 +17,12 @@ import java.util.concurrent.Callable;
 @RestController
 @RequestMapping("/quote")
 @RequiredArgsConstructor
-public class QuoteAndQuouteHistoryApiController {
+public class QuoteAndQuoteHistoryApiController {
 
     private final QuoteAndQuoteHistoryService quoteService;
 
     @PostMapping("/save")
-    public Callable<ResponseEntity<QuoteDto>> save(@RequestBody @Valid QuoteDto quoteDto) {
+    public Callable<ResponseEntity<QuoteDto>> saveOrUpdate(@RequestBody @Valid QuoteDto quoteDto) {
         if(quoteDto.getBid()!=null) {
             if (quoteDto.getBid().compareTo(quoteDto.getAsk()) == 0 ||
                     quoteDto.getBid().compareTo(quoteDto.getAsk()) >0) {
@@ -31,15 +31,6 @@ public class QuoteAndQuouteHistoryApiController {
         }
         return () -> ResponseEntity.ok(quoteService.save(quoteDto));
     }
-   /* @PutMapping("/update")
-    public Callable<ResponseEntity<QuoteDto>> update(@RequestBody @Valid QuoteDto quoteDto) {
-        if(quoteDto.getBid()!=null) {
-            if (quoteDto.getBid().compareTo(quoteDto.getAsk()) == 0) {
-                return () -> new ResponseEntity<>(quoteDto, HttpStatus.BAD_REQUEST);
-            }
-        }
-        return () -> ResponseEntity.ok(quoteService.update(quoteDto));
-    }*/
 
 
 }

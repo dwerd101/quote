@@ -11,7 +11,7 @@ import ru.securities.model.QuoteHistory;
 import java.util.Optional;
 
 @Repository
-public interface QuouteHistoryRepository extends JpaRepository<QuoteHistory,Long> {
+public interface QuoteHistoryRepository extends JpaRepository<QuoteHistory,Long> {
     //Optional<QuoteHistory> findByIsin(String isin);
     @Query(nativeQuery = true, value = "SELECT * FROM  quote_history where isin=?1 ORDER BY date DESC LIMIT 1;")
     Optional<QuoteHistory> findTopByIsinDesc(String isin);

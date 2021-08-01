@@ -6,7 +6,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.ContextConfiguration;
 import ru.securities.app.AppApplication;
-import ru.securities.mapper.QuouteHistoryMapper;
+import ru.securities.mapper.QuoteHistoryMapper;
 import ru.securities.model.dto.QuoteDto;
 
 import java.math.BigDecimal;
@@ -26,7 +26,7 @@ public class QuoteHistoryServiceImplTest {
     private List<QuoteDto> quoteDtoList;
 
     @Autowired
-    private  QuouteHistoryMapper quouteHistoryMapper;
+    private QuoteHistoryMapper quoteHistoryMapper;
 
     @Autowired
     private TestEntityManager entityManager;
@@ -69,27 +69,10 @@ public class QuoteHistoryServiceImplTest {
                 .bid(new BigDecimal("100.2"))
                 .energyLevel(new BigDecimal("103"))
                 .build());
-        quoteDtoList.forEach(quoteDto -> entityManager.persist(quouteHistoryMapper.toModel(quoteDto)));
+        quoteDtoList.forEach(quoteDto -> entityManager.persist(quoteHistoryMapper.toModel(quoteDto)));
         // entityManager.flush();
     }
 
-    @Test
-    void saveQuoteDtoIfGetBidEqualNull_thenReturnOk() {
-        QuoteDto quoteDto = new QuoteDto();
-        quoteDto.setIsin("RU000A0JX0JJ");
-       // quoteDto.setAsk(quoteDtoList.get(1).getAsk());
-
-     //   quoteHistoryService.findAll().forEach(System.out::println);
-        // Optional<Quote> optionalQuote = quoteRepository.findByIsin(quoteDto.getIsin());
-
-        //  when(quoteRepository.findByIsin(any())).thenReturn(optionalQuote);
-        //  when(quoteRepository.save(any())).thenReturn(quoteMapper.toModel(quoteDto));
-        QuoteDto quoteDtoResult = quoteHistoryService.save(quoteDto);
-        quoteDto.setBid(quoteDtoResult.getBid());
-        quoteDto.setEnergyLevel(quoteDtoResult.getEnergyLevel());
-        //  quoteDto.
-        assertEquals(quoteDto, quoteDtoResult);
-    }
 
     @Test
     void saveQuoteIfAskLowerThenElv_thenReturnOk() {
@@ -97,21 +80,17 @@ public class QuoteHistoryServiceImplTest {
         quoteDto.setIsin(quoteDtoList.get(0).getIsin());
         quoteDto.setAsk(quoteDtoList.get(0).getAsk());
         quoteDto.setBid(quoteDtoList.get(0).getBid());
-        entityManager.persist(quouteHistoryMapper.toModel(QuoteDto.builder()
+
+        entityManager.persist(quoteHistoryMapper.toModel(QuoteDto.builder()
                 .isin("RU000A0JX0JJ")
                 .ask(new BigDecimal("101.9"))
                 .bid(new BigDecimal("100.2"))
                 .energyLevel(new BigDecimal("102"))
                 .build()));
 
-        // Optional<Quote> optionalQuote = quoteRepository.findByIsin(quoteDto.getIsin());
-
-        //  when(quoteRepository.findByIsin(any())).thenReturn(optionalQuote);
-        //  when(quoteRepository.save(any())).thenReturn(quoteMapper.toModel(quoteDto));
         QuoteDto quoteDtoResult = quoteHistoryService.save(quoteDto);
         quoteDto.setBid(quoteDtoResult.getBid());
         quoteDto.setEnergyLevel(quoteDtoResult.getEnergyLevel());
-        //  quoteDto.
         assertEquals(101.9, quoteDtoResult.getEnergyLevel().doubleValue());
 
     }
@@ -123,21 +102,16 @@ public class QuoteHistoryServiceImplTest {
         quoteDto.setAsk(quoteDtoList.get(0).getAsk());
         quoteDto.setBid(quoteDtoList.get(0).getBid());
 
-        entityManager.persist(quouteHistoryMapper.toModel(QuoteDto.builder()
+        entityManager.persist(quoteHistoryMapper.toModel(QuoteDto.builder()
                 .isin("RU000A0JX0JJ")
                 .ask(new BigDecimal("101.9"))
                 .bid(new BigDecimal("100.2"))
                 .energyLevel(new BigDecimal("90"))
                 .build()));
 
-        // Optional<Quote> optionalQuote = quoteRepository.findByIsin(quoteDto.getIsin());
-
-        //  when(quoteRepository.findByIsin(any())).thenReturn(optionalQuote);
-        //  when(quoteRepository.save(any())).thenReturn(quoteMapper.toModel(quoteDto));
         QuoteDto quoteDtoResult = quoteHistoryService.save(quoteDto);
         quoteDto.setBid(quoteDtoResult.getBid());
         quoteDto.setEnergyLevel(quoteDtoResult.getEnergyLevel());
-        //  quoteDto.
         assertEquals(100.2, quoteDtoResult.getEnergyLevel().doubleValue());
 
     }
@@ -146,25 +120,11 @@ public class QuoteHistoryServiceImplTest {
     void saveNewQuoteIfBidNotEqualNull_thenReturnOk() {
         QuoteDto quoteDto = new QuoteDto();
         quoteDto.setIsin("FR100A0JX0JJ");
-        //quoteDto.setIsin(quoteDtoList.get(0).getIsin());
         quoteDto.setAsk(quoteDtoList.get(0).getAsk());
         quoteDto.setBid(quoteDtoList.get(0).getBid());
-
-       /* entityManager.persist(quouteHistoryMapper.toModel(QuoteDto.builder()
-                .isin("RU000A0JX0JJ")
-                .ask(new BigDecimal("101.9"))
-                .bid(new BigDecimal("100.2"))
-                .energyLevel(new BigDecimal("102"))
-                .build()));*/
-
-        // Optional<Quote> optionalQuote = quoteRepository.findByIsin(quoteDto.getIsin());
-
-        //  when(quoteRepository.findByIsin(any())).thenReturn(optionalQuote);
-        //  when(quoteRepository.save(any())).thenReturn(quoteMapper.toModel(quoteDto));
         QuoteDto quoteDtoResult = quoteHistoryService.save(quoteDto);
         quoteDto.setBid(quoteDtoResult.getBid());
         quoteDto.setEnergyLevel(quoteDtoResult.getEnergyLevel());
-        //  quoteDto.
         assertEquals(quoteDto, quoteDtoResult);
     }
 
@@ -173,14 +133,8 @@ public class QuoteHistoryServiceImplTest {
         QuoteDto quoteDto = new QuoteDto();
         quoteDto.setIsin("FR100A0JX0JJ");
         quoteDto.setAsk(quoteDtoList.get(0).getAsk());
-
-        // Optional<Quote> optionalQuote = quoteRepository.findByIsin(quoteDto.getIsin());
-
-        //  when(quoteRepository.findByIsin(any())).thenReturn(optionalQuote);
-        //  when(quoteRepository.save(any())).thenReturn(quoteMapper.toModel(quoteDto));
         QuoteDto quoteDtoResult = quoteHistoryService.save(quoteDto);
         quoteDto.setEnergyLevel(quoteDtoResult.getEnergyLevel());
-        //  quoteDto.
         assertEquals(quoteDto, quoteDtoResult);
 
     }

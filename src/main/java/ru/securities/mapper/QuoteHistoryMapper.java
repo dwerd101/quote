@@ -11,7 +11,7 @@ import ru.securities.model.dto.QuoteDto;
 import java.time.ZonedDateTime;
 
 @Mapper(componentModel = "spring", imports = {ZonedDateTime.class})
-public interface QuouteHistoryMapper extends SecuritiesMapper<QuoteHistory,QuoteDto> {
+public interface QuoteHistoryMapper extends SecuritiesMapper<QuoteHistory,QuoteDto> {
     @Mappings({
             @Mapping(target = "isin", source = "quote.isin"),
             @Mapping(target = "bid", source = "quote.bid"),

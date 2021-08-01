@@ -15,8 +15,6 @@ public class QuoteAndQuouteHistoryServiceImpl implements QuoteAndQuoteHistorySer
     private final QuoteService quoteService;
     private final QuoteHistoryService quoteHistoryService;
 
-
-
     @Transactional
     @Override
     public QuoteDto save(QuoteDto quoteDto) {
@@ -35,9 +33,7 @@ public class QuoteAndQuouteHistoryServiceImpl implements QuoteAndQuoteHistorySer
     @Transactional
     @Override
     public QuoteDto update(QuoteDto quoteDto) {
-        quoteHistoryService.save(quoteDto);
-        quoteService.update(quoteDto);
-        return quoteDto;
+       return null;
     }
 
     @Override

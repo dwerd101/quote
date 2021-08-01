@@ -5,10 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
@@ -25,19 +23,19 @@ public class QuoteHistory {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
- /*   @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "qoute_id", referencedColumnName = "isin")
-    private Quote quoteId;*/
+
     @NotNull
     @Size(min = 12, max = 12)
     @Column(name = "isin")
     private String isin;
-   // @NotNull
+
     @Column(name = "bid")
     private BigDecimal bid;
+
     @NotNull
     @Column(name = "ask")
     private BigDecimal ask;
+
     @NotNull
     @Column(name = "elv")
     private BigDecimal energyLevel;
@@ -45,9 +43,5 @@ public class QuoteHistory {
     @Column(name = "date")
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private ZonedDateTime zoneDateTime;
-
-    public static void main(String[] args) {
-
-    }
 
 }

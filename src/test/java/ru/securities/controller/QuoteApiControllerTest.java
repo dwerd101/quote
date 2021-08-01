@@ -4,7 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -39,13 +38,6 @@ import static org.junit.jupiter.api.Assertions.*;
 public class QuoteApiControllerTest {
 
 
- /*   .ISIN: RU000A0JX0J2Bid: 100.2
-    Ask: 101.9
-    Котировка новая, поэтому elvl -> 100.22.
-    Пришла новая котировка, уже существует elvl
-    ISIN: RU000A0JX0J2Bid: 100.5
-    Ask: 101.9
-    ТаккакBid> elvl, тоновыйelvl= 100.5 (bid)*/
 
     @Autowired
     private MockMvc mockMvc;

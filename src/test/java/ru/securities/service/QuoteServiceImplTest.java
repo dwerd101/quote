@@ -1,31 +1,17 @@
 package ru.securities.service;
-
-import org.checkerframework.checker.nullness.Opt;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.Lifecycle;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.transaction.annotation.Transactional;
 import ru.securities.app.AppApplication;
 import ru.securities.exception.QuoteNotFoundException;
 import ru.securities.mapper.QuoteMapper;
-import ru.securities.model.Quote;
 import ru.securities.model.dto.QuoteDto;
-import ru.securities.repository.QuoteRepository;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -84,10 +70,6 @@ public class QuoteServiceImplTest {
     @Test
         //@Transactional(readOnly = true)
     void findAll_thenReturnOk() {
-       /* when(quoteRepository.findAll()).thenReturn(quoteDtoList.stream()
-                .map(quoteMapper::toModel)
-                .collect(Collectors.toList()));*/
-
         List<QuoteDto> list = quoteService.findAll();
         assertEquals(list, quoteDtoList);
     }
@@ -97,15 +79,9 @@ public class QuoteServiceImplTest {
         QuoteDto quoteDto = new QuoteDto();
         quoteDto.setIsin(quoteDtoList.get(1).getIsin());
         quoteDto.setAsk(quoteDtoList.get(1).getAsk());
-
-        // Optional<Quote> optionalQuote = quoteRepository.findByIsin(quoteDto.getIsin());
-
-        //  when(quoteRepository.findByIsin(any())).thenReturn(optionalQuote);
-        //  when(quoteRepository.save(any())).thenReturn(quoteMapper.toModel(quoteDto));
         QuoteDto quoteDtoResult = quoteService.save(quoteDto);
         quoteDto.setBid(quoteDtoResult.getBid());
         quoteDto.setEnergyLevel(quoteDtoResult.getEnergyLevel());
-        //  quoteDto.
         assertEquals(101.9, quoteDtoResult.getEnergyLevel().doubleValue());
     }
 
@@ -115,15 +91,9 @@ public class QuoteServiceImplTest {
         quoteDto.setIsin(quoteDtoList.get(3).getIsin());
         quoteDto.setAsk(quoteDtoList.get(3).getAsk());
         quoteDto.setBid(quoteDtoList.get(3).getBid());
-
-        // Optional<Quote> optionalQuote = quoteRepository.findByIsin(quoteDto.getIsin());
-
-        //  when(quoteRepository.findByIsin(any())).thenReturn(optionalQuote);
-        //  when(quoteRepository.save(any())).thenReturn(quoteMapper.toModel(quoteDto));
         QuoteDto quoteDtoResult = quoteService.save(quoteDto);
         quoteDto.setBid(quoteDtoResult.getBid());
         quoteDto.setEnergyLevel(quoteDtoResult.getEnergyLevel());
-        //  quoteDto.
         assertEquals(101.9, quoteDtoResult.getEnergyLevel().doubleValue());
 
     }
@@ -135,14 +105,9 @@ public class QuoteServiceImplTest {
         quoteDto.setAsk(quoteDtoList.get(0).getAsk());
         quoteDto.setBid(quoteDtoList.get(0).getBid());
 
-        // Optional<Quote> optionalQuote = quoteRepository.findByIsin(quoteDto.getIsin());
-
-        //  when(quoteRepository.findByIsin(any())).thenReturn(optionalQuote);
-        //  when(quoteRepository.save(any())).thenReturn(quoteMapper.toModel(quoteDto));
         QuoteDto quoteDtoResult = quoteService.save(quoteDto);
         quoteDto.setBid(quoteDtoResult.getBid());
         quoteDto.setEnergyLevel(quoteDtoResult.getEnergyLevel());
-        //  quoteDto.
         assertEquals(100.2, quoteDtoResult.getEnergyLevel().doubleValue());
 
     }
@@ -153,15 +118,9 @@ public class QuoteServiceImplTest {
         quoteDto.setIsin("FR100A0JX0JJ");
         quoteDto.setAsk(quoteDtoList.get(0).getAsk());
         quoteDto.setBid(quoteDtoList.get(0).getBid());
-
-        // Optional<Quote> optionalQuote = quoteRepository.findByIsin(quoteDto.getIsin());
-
-        //  when(quoteRepository.findByIsin(any())).thenReturn(optionalQuote);
-        //  when(quoteRepository.save(any())).thenReturn(quoteMapper.toModel(quoteDto));
         QuoteDto quoteDtoResult = quoteService.save(quoteDto);
         quoteDto.setBid(quoteDtoResult.getBid());
         quoteDto.setEnergyLevel(quoteDtoResult.getEnergyLevel());
-        //  quoteDto.
         assertEquals(quoteDto, quoteDtoResult);
     }
 
@@ -170,14 +129,8 @@ public class QuoteServiceImplTest {
         QuoteDto quoteDto = new QuoteDto();
         quoteDto.setIsin("FR100A0JX0JJ");
         quoteDto.setAsk(quoteDtoList.get(0).getAsk());
-
-        // Optional<Quote> optionalQuote = quoteRepository.findByIsin(quoteDto.getIsin());
-
-        //  when(quoteRepository.findByIsin(any())).thenReturn(optionalQuote);
-        //  when(quoteRepository.save(any())).thenReturn(quoteMapper.toModel(quoteDto));
         QuoteDto quoteDtoResult = quoteService.save(quoteDto);
         quoteDto.setEnergyLevel(quoteDtoResult.getEnergyLevel());
-        //  quoteDto.
         assertEquals(quoteDto, quoteDtoResult);
 
     }
